@@ -1,7 +1,7 @@
 # nHentai-Viewer
 - Show all image automatic in one page
 
-# How to Install
+# How to Use
 Step1. You need Tempermonkey.
 
 - Chrome: [Tempermonkey](https://chrome.google.com/webstore/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo?hl=zh-TW)
