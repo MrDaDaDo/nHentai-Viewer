@@ -1,4 +1,4 @@
-# nHentai-Viewer
+# nHentai Viewer
 - Show all image automatic in one page
 
 # How to Use
