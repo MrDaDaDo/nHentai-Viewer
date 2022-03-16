@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         nHentai-Viewer
-// @version      2.3
+// @version      2.4
 // @author       MrDaDaDo
 // @include      /^https:\/\/nhentai\.net\/g\/(\d)+\/(\d)+\//
 // @require      https://code.jquery.com/jquery-3.3.1.min.js
@@ -12,7 +12,15 @@
     };
     var genImageUrl = function(thumbUrl) {
         return thumbUrl
+            .replace('t1.nhentai.net','i7.nhentai.net')
+            .replace('t2.nhentai.net','i7.nhentai.net')
             .replace('t3.nhentai.net','i7.nhentai.net')
+            .replace('t4.nhentai.net','i7.nhentai.net')
+            .replace('t5.nhentai.net','i7.nhentai.net')
+            .replace('t6.nhentai.net','i7.nhentai.net')
+            .replace('t7.nhentai.net','i7.nhentai.net')
+            .replace('t8.nhentai.net','i7.nhentai.net')
+            .replace('t9.nhentai.net','i7.nhentai.net')
             .replace('t.nhentai.net','i.nhentai.net')
             .replace('t.nhentai','z.nhentai')
             .replace('t.','.')
