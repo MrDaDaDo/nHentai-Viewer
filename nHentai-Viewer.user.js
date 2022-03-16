@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         nHentai-Viewer
-// @version      2.2
+// @version      2.3
 // @author       MrDaDaDo
 // @include      /^https:\/\/nhentai\.net\/g\/(\d)+\/(\d)+\//
 // @require      https://code.jquery.com/jquery-3.3.1.min.js
@@ -11,10 +11,15 @@
         return 'https://nhentai.net/g/' + bookID + '/';
     };
     var genImageUrl = function(thumbUrl) {
-        return thumbUrl.replace('t3.nhentai.net','i7.nhentai.net').replace('t.','.');
+        return thumbUrl
+            .replace('t3.nhentai.net','i7.nhentai.net')
+            .replace('t.nhentai.net','i.nhentai.net')
+            .replace('t.nhentai','z.nhentai')
+            .replace('t.','.')
+            .replace('z.nhentai','t.nhentai');
     };
     var parseImageSrcs = function(galleryHtml) {
-        var regexp = /data\-src="https:\/\/t3\.nhentai\.net\/galleries\/(\d)+\/(\d)+t.[a-zA-Z]+"/g;
+        var regexp = /data\-src="https:\/\/t(\d?)\.nhentai\.net\/galleries\/(\d)+\/(\d)+t.[a-zA-Z]+"/g;
         var imageSrcs = galleryHtml.match(regexp);
         imageSrcs = imageSrcs.map( function(o){ return genImageUrl(o.replace('data-src=','').replace(/"/g,'')); });
         return imageSrcs;
