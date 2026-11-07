@@ -27,11 +27,19 @@
         if ($mine.length) { return $mine; }
         $('<style>#image-container{display:none !important}</style>').appendTo(document.head);
         $mine = $('<div id="nhv-container"></div>');
-        var $orig = $('#image-container').first();
-        if ($orig.length) {
-            $orig.before($mine);
+        // 先放在 body 最後面（Svelte 的 hydration 範圍之外），避免 hydration_mismatch
+        $('body').append($mine);
+        // 網站載入完成後，再搬到原本圖片容器的位置
+        var relocate = function() {
+            var $orig = $('#image-container').first();
+            if ($orig.length && $mine.parent().is('body')) {
+                $orig.before($mine);
+            }
+        };
+        if (document.readyState === 'complete') {
+            setTimeout(relocate, 2000);
         } else {
-            $('body').append($mine);
+            $(window).on('load', function() { setTimeout(relocate, 2000); });
         }
         return $mine;
     };
