@@ -20,7 +20,23 @@
             return 'https://i.nhentai.net/' + page.path;
         });
     };
+    // 網站是 SvelteKit，#image-container 由框架管理、會被重新渲染而蓋掉我們的內容。
+    // 所以隱藏它，改用自己的容器。
+    var getContainer = function() {
+        var $mine = $('#nhv-container');
+        if ($mine.length) { return $mine; }
+        $('<style>#image-container{display:none !important}</style>').appendTo(document.head);
+        $mine = $('<div id="nhv-container"></div>');
+        var $orig = $('#image-container').first();
+        if ($orig.length) {
+            $orig.before($mine);
+        } else {
+            $('body').append($mine);
+        }
+        return $mine;
+    };
     var showImage = function(imageSrcs) {
+        var $container = getContainer();
         $container.html("");
         imageSrcs.forEach(function(imageSrc) {
             var imgDom = document.createElement('img');
@@ -32,6 +48,7 @@
             imgDom.style.margin = '0 auto';
             $container.append(imgDom);
         });
+        console.log('[nHentai-Viewer] 已顯示 ' + imageSrcs.length + ' 張圖');
     };
     var loadGallery = function(bookID) {
         $.getJSON(genApiUrl(bookID), function(gallery) {
@@ -45,11 +62,7 @@
             console.error('[nHentai-Viewer] 載入 API 失敗', xhr.status);
         });
     };
-    var go = function(bookID) {
-        loadGallery(bookID);
-    };
     var $ = window.jQuery;
-    var bookID = document.location.href.split('/')[4];
-    var $container = $('#image-container');
-    go(bookID);
+    console.log('[nHentai-Viewer] 腳本已啟動');
+    loadGallery(document.location.href.split('/')[4]);
 })();
