@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         nHentai-Viewer
-// @version      2.5
+// @version      3.0
 // @author       MrDaDaDo
 // @namespace    https://github.com/MrDaDaDo/nHentai-Viewer
 // @match        https://nhentai.net/g/*/*
